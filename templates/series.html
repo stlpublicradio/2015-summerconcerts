@@ -1,0 +1,51 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<div class="concert-header" data-spy="affix" data-offset-top="60">
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+<div class="title"><h1>{{ COPY.content.project_name }} <small>{{ COPY.content.name_small }}</small></h1>
+<p>{{ COPY.content.intro }}</p>
+<h3>Viewing by series. <a href="index.html">View by week instead?</a></h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+
+{% for group, concert in COPY.concerts|sort(attribute='series')|groupby(attribute='series') %}
+<div class="series">
+	<div class="series-header">
+<a class="anchor" id={{ group | slugify }}>
+	<div class="address-link"><a href="http://www.google.com/maps/place/{{concert[0].address|replace(" ", "+")}}" target="_blank"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-map-marker fa-stack-1x"></i></span></a></div>
+	<div class="section-link"><a title="link to this section" href="#{{ group | slugify }}"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-link fa-stack-1x"></i></span></a></div><h2>{{ group }} <small>{{ concert[0].venue }}, {{ concert[0].address }}</small></h2>
+</div>
+		<div class="list-group">
+						{% for show in concert %}
+					<li class="list-group-item"><h3>{{show.name}} <small>{{show.date}}, {{show.day}}, {{ show.time}}</small></h3>
+{% if show.note %}
+					<ul>
+
+						<li>{{show.note }} </li>
+					</ul>
+{% endif %}
+					</li>
+											{% endfor %}
+</a>
+</div>	
+{% endfor %}
+<div id="story-meta">
+    <p class="byline">by <span>{{ COPY.content.byline }}</span></p>
+    <p class="dateblock">
+        <span class="date">Updated {{ COPY.content.pubdate }}</span>
+    </p>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

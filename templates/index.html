@@ -1,47 +1,76 @@
 {% extends '_base.html' %}
 
-{% block header_content %}
-<header>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>{{ COPY.content.project_name|smarty }}</h1>
-                <h2>{{ COPY.content.lorem_ipsum|smarty }}</h2>
-            </div>
-        </div>
-    </div>
-</header>
-{% endblock %}
-
-
 {% block content %}
-<h1>{{ COPY.content.project_name }}</h1>
+<div class="concert-header" data-spy="affix" data-offset-top="60">
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+<div class="title"><h1>{{ COPY.content.project_name }} <small>{{ COPY.content.name_small }}</small></h1>
+<p>{{ COPY.content.intro }}</p>
+<h3>Viewing by week. <a href="series.html">View by concert series instead?</a></h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+{% for week in COPY.weeks %}
+<div class="week">
+	<div class="week-header">
+<a class="anchor" id=week-{{ week.mon | slugify }}>
+	<div class="section-link"><a title="link to this section" href="#week-{{ week.mon | slugify }}"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-link fa-stack-1x"></i></span></a></div>
+	<h2>{{ week.mon }} — {{ week.sun }}</h2>
+</div>
+		<div class="list-group">
+			{% for concert in COPY.concerts|groupby(attribute='numeric_date') %}
+			
+			{% macro day(name) -%}
+			<li class="list-group-item"><h3>{{name}} <small>{{concert[1][0].date}}</small></h3>
+			<ul>
+			{% for show in concert.list %}
+			<li>{% if show.url %}<a href="{{show.url}}">{{show.series}}</a>{% else %}{{ show.series }}{% endif %}: {{ show.time }} at {{show.venue}} with {{show.name }} <a href="http://www.google.com/maps/place/{{show.address|replace(" ", "+")}}" target="_blank"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-map-marker fa-stack-1x"></i></span></a></li>
+			{% endfor %}
+			</ul>
+			</li>
+			{%- endmacro %}
+			
+			{% if concert[1][0].date in [week.mon] %}
+			{{day('Monday')}}
+			{% endif %}
+			{% if concert[1][0].date in [week.tue] %}
+			{{day('Tuesday')}}
+			{% endif %}
+			{% if concert[1][0].date in [week.wed] %}
+			{{day('Wednesday')}}
+			{% endif %}
+			{% if concert[1][0].date in [week.thu] %}
+			{{day('Thursday')}}
+			{% endif %}
+			{% if concert[1][0].date in [week.fri] %}
+			{{day('Friday')}}
+			{% if concert[1][0].date in [week.sat] %}
+			{{day('Saturday')}}
+			{% endif %}
+			{% if concert[1][0].date in [week.sun] %}
+			{{day('Sunday')}}
+			{% endif %}
+			{% endif %}
+			{% endfor %}
+			
+</a>
+</div>
+{% endfor %}
 
 <div id="story-meta">
     <p class="byline">by <span>{{ COPY.content.byline }}</span></p>
     <p class="dateblock">
-        <span class="date">{{ COPY.content.pubdate }}</span>
-        <span class="time"> {{ COPY.content.pubtime }}</span>
+        <span class="date">Updated {{ COPY.content.pubdate }}</span>
     </p>
 </div>
 
-<h2>Example COPY list</h2>
-<dl>
-    {% for row in COPY.example_list %}
-    <dt>{{ row.term }}</dt><dd>{{ row.definition }}</dd>
-    {% endfor %}
-</dl>
-
-<h2>JST example</h2>
-<p id="template-example"></p>
-{% endblock %}
-
-
-{% block wide_content %}
-<div class="row">
-    <div class="col-md-12">
-        <h2>{{ COPY.content.footer_title }}</h2>
-        <p>{{ COPY.content.lorem_ipsum }}</p>
-    </div>
-</div>
-{% endblock %}
+</div></div>
+</div>{% endblock %}

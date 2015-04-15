@@ -6,7 +6,7 @@ from flask import Flask, make_response, render_template
 from werkzeug.debug import DebuggedApplication
 
 import app_config
-from render_utils import make_context, smarty_filter, urlencode_filter
+from render_utils import make_context, smarty_filter, urlencode_filter, slugify_filter
 import static
 
 app = Flask(__name__)
@@ -14,6 +14,7 @@ app.debug = app_config.DEBUG
 
 app.add_template_filter(smarty_filter, name='smarty')
 app.add_template_filter(urlencode_filter, name='urlencode')
+app.add_template_filter(slugify_filter, name='slugify')
 
 # Example application views
 @app.route('/')
@@ -27,6 +28,19 @@ def index():
         context['featured'] = json.load(f)
 
     return make_response(render_template('index.html', **context))
+
+@app.route('/series.html')
+def series():
+    """
+    Example view demonstrating rendering a simple HTML page.
+    """
+    context = make_context()
+
+    with open('data/featured.json') as f:
+        context['featured'] = json.load(f)
+
+    return make_response(render_template('series.html', **context))
+
 
 @app.route('/widget.html')
 def widget():

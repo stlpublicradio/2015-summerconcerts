@@ -5,6 +5,7 @@ from datetime import datetime
 import json
 import time
 import urllib
+import re
 
 from cssmin import cssmin
 from flask import Markup, g, render_template, request
@@ -215,3 +216,22 @@ def smarty_filter(s):
 
     return Markup(s)
 
+def slugify_filter(s):
+    _slugify_strip_re = re.compile(r'[^\w\s-]')
+    _slugify_hyphenate_re = re.compile(r'[-\s]+')
+
+    """
+    Normalizes string, converts to lowercase, removes non-alpha characters,
+    and converts spaces to hyphens.
+    
+    From Django's "django/template/defaultfilters.py".
+    """
+    import unicodedata
+    if not isinstance(s, unicode):
+        value = unicode(s)
+    s = unicodedata.normalize('NFKD', s).encode('ascii', 'ignore')
+    s = unicode(_slugify_strip_re.sub('', s).strip().lower())
+
+    s = _slugify_hyphenate_re.sub('-', s)
+    
+    return Markup(s)

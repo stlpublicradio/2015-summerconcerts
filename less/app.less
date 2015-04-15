@@ -50,9 +50,20 @@ header {
 }
 
 // Content
-#content { 
-	margin: 5 auto 44 auto;
-	width: 90%;	
+#main-content { 
+	padding: 20px 0;
+	width: 100%;	
+	background: #00ccff;
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwY2NmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjE1JSIgc3RvcC1jb2xvcj0iI2ZmZjYxNyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2U4ODYwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijg4JSIgc3RvcC1jb2xvcj0iI2ZmNDg0MiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+	background: -moz-linear-gradient(top,  #00ccff 0%, #fff617 25%, #e88600 50%, #ff4842 88%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#00ccff), color-stop(25%,#fff617), color-stop(50%,#e88600), color-stop(88%,#ff4842));
+	background: -webkit-linear-gradient(top,  #00ccff 0%,#fff617 25%,#e88600 50%,#ff4842 88%);
+	background: -o-linear-gradient(top,  #00ccff 0%,#fff617 25%,#e88600 50%,#ff4842 88%);
+	background: -ms-linear-gradient(top,  #00ccff 0%,#fff617 25%,#e88600 50%,#ff4842 88%);
+	background: linear-gradient(to bottom,  #00ccff 0%,#fff617 25%,#e88600 50%,#ff4842 88%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ccff', endColorstr='#ff4842',GradientType=0 );
+
+	
  }
  
 #story-meta {
@@ -69,3 +80,89 @@ header {
 		}
 	
 	}
+	
+	
+body {
+	h1,
+	h2,
+	h3 {
+	font-family: 'Lobster Two', cursive;
+	font-weight: 700;
+	
+}
+
+h1, .fa-map-marker {
+	color: #FFFF00;
+}
+
+h1 small {
+	color: #000;
+}
+
+h3 small {
+	font-family: 'Merriweather'
+}
+
+h1 {
+	font-size: 3em;
+}
+
+h2 {
+	font-size: 2em;
+}
+
+.fa-circle {
+	color: rgba(0,0,0,.3)
+}
+
+.fa-link {
+	color: #999;
+}
+
+}
+
+.list-group {
+	margin-bottom: 50px;
+}
+
+.list-group-item {
+	background-color:rgba(255,255,255,0.7);
+	border-color: #fff;
+}
+
+.well {
+	background-color:rgba(255,255,255,0.7);
+}
+
+.concert-header {
+	width: 100%;
+	z-index: 10;
+	
+	&.affix {
+		background: fade(@stlpr-red, 80%);
+		top: 0;
+	}
+}
+
+a.anchor {
+	display: block;
+	position: relative;
+	top: -200px;
+	visibility: hidden;
+}
+
+.section-link {
+	float:right;
+}
+
+.address-link {
+	float: right; 
+}
+
+.title {
+	small,
+	p,
+	h3 {
+		color: #fff;
+	}
+}
