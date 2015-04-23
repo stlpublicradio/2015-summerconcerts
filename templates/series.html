@@ -7,7 +7,7 @@
 		<div class="col-sm-12">
 <div class="title"><h1>{{ COPY.content.project_name }} <small>{{ COPY.content.name_small }}</small></h1>
 <p>{{ COPY.content.intro }}</p>
-<h3>Viewing by series. <a href="index.html">View by week instead?</a></h3>
+<h3>Viewing by city and series. <a href="index.html">View by week instead?</a></h3>
 </div>
 </div>
 </div>
@@ -17,13 +17,15 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-12">
+		
+{% for group, series in COPY.concerts|sort(attribute='city')|groupby(attribute='city') %}
 
-{% for group, concert in COPY.concerts|sort(attribute='series')|groupby(attribute='series') %}
+{% for group, concert in series|groupby(attribute='series') %}
 <div class="series">
 	<div class="series-header">
 <a class="anchor" id={{ group | slugify }}>
 	<div class="address-link"><a href="http://www.google.com/maps/place/{{concert[0].address|replace(" ", "+")}}" target="_blank"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-map-marker fa-stack-1x"></i></span></a></div>
-	<div class="section-link"><a title="link to this section" href="#{{ group | slugify }}"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-link fa-stack-1x"></i></span></a></div><h2>{{ group }} <small>{{ concert[0].venue }}, {{ concert[0].address }}</small></h2>
+	<div class="section-link"><a title="link to this section" href="#{{ group | slugify }}"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-link fa-stack-1x"></i></span></a></div><h2>{{ concert[0].city }} — {{ group }} <small>{{ concert[0].venue }}, {{ concert[0].address }}</small></h2>
 </div>
 		<div class="list-group">
 						{% for show in concert %}
@@ -38,6 +40,7 @@
 											{% endfor %}
 </a>
 </div>	
+{% endfor %}
 {% endfor %}
 <div id="story-meta">
     <p class="byline">by <span>{{ COPY.content.byline }}</span></p>
