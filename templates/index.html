@@ -1,14 +1,21 @@
 {% extends '_base.html' %}
 
 {% block content %}
-<div class="concert-header" data-spy="affix" data-offset-top="60">
+<div class="concert-header">
 <div class="container">
 	<div class="row">
 		<div class="col-sm-12">
 <div class="title"><h1>{{ COPY.content.project_name }} <small>{{ COPY.content.name_small }}</small></h1>
 <p>{{ COPY.content.intro }}</p>
-<h3>Viewing by week. <a href="series.html">View by concert series instead?</a></h3>
 </div>
+</div>
+</div>
+</div>
+<div class="top-menu" data-spy="affix" data-offset-top="100">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+	<h3>Viewing by week. <a href="series.html">View by concert series instead?</a></h3>
 </div>
 </div>
 </div>
@@ -39,25 +46,25 @@
 			{%- endmacro %}
 			
 			{% if concert[1][0].date in [week.mon] %}
-			{{day('Monday')}}
+				{{day('Monday')}}
 			{% endif %}
 			{% if concert[1][0].date in [week.tue] %}
-			{{day('Tuesday')}}
+				{{day('Tuesday')}}
 			{% endif %}
 			{% if concert[1][0].date in [week.wed] %}
-			{{day('Wednesday')}}
+				{{day('Wednesday')}}
 			{% endif %}
 			{% if concert[1][0].date in [week.thu] %}
-			{{day('Thursday')}}
+				{{day('Thursday')}}
 			{% endif %}
 			{% if concert[1][0].date in [week.fri] %}
-			{{day('Friday')}}
+				{{day('Friday')}}
+			{% endif %}
 			{% if concert[1][0].date in [week.sat] %}
-			{{day('Saturday')}}
+				{{day('Saturday')}}
 			{% endif %}
 			{% if concert[1][0].date in [week.sun] %}
-			{{day('Sunday')}}
-			{% endif %}
+				{{day('Sunday')}}
 			{% endif %}
 			{% endfor %}
 			

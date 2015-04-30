@@ -134,20 +134,28 @@ h2 {
 	background-color:rgba(255,255,255,0.7);
 }
 
-.concert-header {
+.top-menu {
 	width: 100%;
 	z-index: 10;
+	
+	h3 {
+		color:#fff;
+	}
 	
 	&.affix {
 		background: fade(@stlpr-red, 80%);
 		top: 0;
+		
+		h3 {
+		font-size: 1em;
+		}
 	}
 }
 
 a.anchor {
 	display: block;
 	position: relative;
-	top: -200px;
+	top: -75px;
 	visibility: hidden;
 }
 
